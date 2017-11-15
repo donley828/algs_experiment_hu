@@ -1,6 +1,10 @@
 package classhu;
 
-import java.util.Scanner;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
 
 import edu.princeton.cs.algs4.BinaryStdIn;
 import edu.princeton.cs.algs4.BinaryStdOut;
@@ -131,11 +135,37 @@ public class Huffman {
 	}
 
 	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		String str = null;
-		str = scanner.next();
-		System.out.println(str);
-		CHuffman(str);
-		scanner.close();
+		// Scanner scanner = new Scanner(System.in);
+		// String str = null;
+		// str = scanner.next();
+		// System.out.println(str);
+		// CHuffman(str);
+		// scanner.close();
+		File file = new File("../data.txt");
+		InputStream in = null;
+		long i;
+		try {
+			FileWriter fileWriter = new FileWriter(file.getName(), true);
+			BufferedWriter bufferWriter = new BufferedWriter(fileWriter);
+			for (i = 0; i < 1000000; i++) {
+				bufferWriter.write((int) Math.floor(Math.random() * 10));
+			}
+			bufferWriter.close();
+			System.out.println("Done");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		try {
+			in = new FileInputStream(file);
+			int tempbyte;
+			while ((tempbyte = in.read()) != -1) {
+				System.out.write(tempbyte);
+			}
+			in.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 }
